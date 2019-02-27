@@ -1,14 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student List 2</title>
-    <link rel="stylesheet" href="studentlist.css" type="text/css">
-</head>
-<body>
-  <h1>Students 1991</h1>
-    
-  <script src="studentlist.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" type="text/css" href="studentlist.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Abril+Fatface"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Abril+Fatface|Comfortaa"
+      rel="stylesheet"
+    />
+    <title>Student-list</title>
+  </head>
+  <body>
+    <header>
+      <h1>Hogwarts</h1>
+      <h2>Students from 1991</h2>
+    </header>
+    <main>
+      <nav>
+        <a id="All" href="#">All</a>
+        <a id="firstName" href="#">Fist Name</a>
+        <a id="lastName" href="#">Last Name</a>
+        <a id="house" href="#">House</a>
+        <div class="dropdown">
+          <a>Filters</a>
+          <div class="dropdown-window">
+            <span id="gryffindor">Gryffindor</span>
+            <span id="hufflepuff">Hufflepuff</span>
+            <span id="ravenclaw">Ravenclaw</span>
+            <span id="slytherin">Slytherin</span>
+            <span id="all">All</span>
+          </div>
+        </div>
+      </nav>
+
+      <div id="studentListContainer"></div>
+
+      <template id="studentTemplate">
+        <div>
+          <h1 class="firstName">First Name: <span></span></h1>
+        </div>
+        <div>
+          <h1 class="lastName">Last Name: <span></span></h1>
+        </div>
+        <div>
+          <h1 class="house">House: <span></span></h1>
+        </div>
+        <div class="image">
+          <img src="" />
+        </div>
+      </template>
+    </main>
+
+    <!---<aside id="modal" class="modal hide">
+        <div class="modal-content">
+            <img class="studentImage" src="" alt="image" />
+            <h1 class="name">Name: <span></span></h1>
+            <h2 class="house">Student House</h2>
+        </div>
+    </aside>--->
+
+    <script src="studentlist.js"></script>
+  </body>
 </html>
