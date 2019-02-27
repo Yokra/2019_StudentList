@@ -184,14 +184,14 @@ function showOneStudent(student) {
   console.log(student);
 
   const modal = document.querySelector(".modal");
-
+  modal.querySelector(".modal-content").id = student.fullname;
   modal.querySelector(".studentImage").src = student.image;
-  modal.querySelector(".name span").textContent = student.fullName;
+  modal.querySelector(".name span").textContent = student.fullname;
   modal.querySelector(".house").textContent = student.house;
   if (student.house == "Gryffindor") {
-    modal.querySelector(".modal-content").classList.add("Griffindor");
+    modal.querySelector(".modal-content").classList.add("Gryffindor");
   } else {
-    modal.querySelector(".modal-content").classList.remove("Griffindor");
+    modal.querySelector(".modal-content").classList.remove("Gryffindor");
   }
 
   if (student.house == "Hufflepuff") {
