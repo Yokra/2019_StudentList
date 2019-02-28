@@ -4,6 +4,7 @@ const baseLink = "http://petlatkea.dk/2019/students1991.json";
 window.addEventListener("DOMContentLoaded", init);
 const studentPro = {
   //student prototype(template)
+
   fullName: "-student name-",
   firstName: "-student first name-",
   lastName: "-student last name-",
@@ -37,7 +38,7 @@ function createList(studentList) {
 
     const firstSpace = element.fullname.indexOf(" ");
     const lastSpace = element.fullname.lastIndexOf(" ");
-
+    student.id = element.id;
     student.fullName = element.fullname;
     student.firstName = element.fullname.slice(0, firstSpace);
     student.lastName = element.fullname.slice(lastSpace + 1);
@@ -74,8 +75,7 @@ function displayStudent(student) {
   const template = document.querySelector("#studentTemplate").content;
   const clone = template.cloneNode(true);
 
-  //clone.addEventListener("click", () => showOneStudent(student));
-
+  clone.querySelector("[data-action=remove]").dataset.id = student.id;
   clone.querySelector(".firstName span").textContent = student.firstName;
   clone.querySelector(".lastName span").textContent = student.lastName;
   clone.querySelector(".house span").textContent = student.house;
@@ -84,6 +84,10 @@ function displayStudent(student) {
     .querySelector("#selectorForModal")
     .addEventListener("click", () => showOneStudent(student));
   //console.log(student.firstname);
+  clone
+    .querySelector("[data-action=remove]")
+    .addEventListener("click", removeStudent);
+
   document.querySelector("#studentListContainer").appendChild(clone);
 }
 
@@ -199,19 +203,19 @@ function showOneStudent(student) {
     modal.querySelector(".modal-content").classList.remove("gryffindor");
   }
 
-  if (student.house == "hufflepuff") {
+  if (student.house == "Hufflepuff") {
     modal.querySelector(".modal-content").classList.add("hufflepuff");
   } else {
     modal.querySelector(".modal-content").classList.remove("hufflepuff");
   }
 
-  if (student.house == "ravenclaw") {
+  if (student.house == "Ravenclaw") {
     modal.querySelector(".modal-content").classList.add("ravenclaw");
   } else {
     modal.querySelector(".modal-content").classList.remove("ravenclaw");
   }
 
-  if (student.house == "slytherin") {
+  if (student.house == "Slytherin") {
     modal.querySelector(".modal-content").classList.add("slytherin");
   } else {
     modal.querySelector(".modal-content").classList.remove("slytherin");
@@ -220,3 +224,17 @@ function showOneStudent(student) {
   modal.classList.remove("hide");
   modal.addEventListener("click", () => modal.classList.add("hide"));
 }
+
+/***********************expeling**************************/
+
+function removeStudent(event) {
+  console.log("removeStudents");
+
+  console.log(arrayOfStudents);
+  let obj = arrayOfStudents.find(obj => obj.id === event.target.dataset.id);
+  let pos = arrayOfStudents.indexOf(obj);
+  console.log(pos);
+  arrayOfStudents.splice(pos, 1);
+  console.log(arrayOfStudents);
+}
+removeStudent();
