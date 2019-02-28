@@ -79,7 +79,10 @@ function displayStudent(student) {
   clone.querySelector(".firstName span").textContent = student.firstName;
   clone.querySelector(".lastName span").textContent = student.lastName;
   clone.querySelector(".house span").textContent = student.house;
-  clone.querySelector(".image img").setAttribute("src", student.image);
+  //clone.querySelector(".image img").setAttribute("src", student.image);
+  clone
+    .querySelector("#selectorForModal")
+    .addEventListener("click", () => showOneStudent(student));
   //console.log(student.firstname);
   document.querySelector("#studentListContainer").appendChild(clone);
 }
@@ -181,35 +184,37 @@ function sortByHouse() {
 /***************modal*********************/
 
 function showOneStudent(student) {
-  console.log(student);
+  console.log("showOneStudent");
+  console.log(student.image);
 
   const modal = document.querySelector(".modal");
-  modal.querySelector(".modal-content").id = student.fullname;
+
   modal.querySelector(".studentImage").src = student.image;
-  modal.querySelector(".name span").textContent = student.fullname;
+  modal.querySelector(".name span").textContent = student.fullName;
   modal.querySelector(".house").textContent = student.house;
+
   if (student.house == "Gryffindor") {
-    modal.querySelector(".modal-content").classList.add("Gryffindor");
+    modal.querySelector(".modal-content").classList.add("gryffindor");
   } else {
-    modal.querySelector(".modal-content").classList.remove("Gryffindor");
+    modal.querySelector(".modal-content").classList.remove("gryffindor");
   }
 
-  if (student.house == "Hufflepuff") {
-    modal.querySelector(".modal-content").classList.add("Hufflepuff");
+  if (student.house == "hufflepuff") {
+    modal.querySelector(".modal-content").classList.add("hufflepuff");
   } else {
-    modal.querySelector(".modal-content").classList.remove("Hufflepuff");
+    modal.querySelector(".modal-content").classList.remove("hufflepuff");
   }
 
-  if (student.house == "Ravenclaw") {
-    modal.querySelector(".modal-content").classList.add("Ravenclaw");
+  if (student.house == "ravenclaw") {
+    modal.querySelector(".modal-content").classList.add("ravenclaw");
   } else {
-    modal.querySelector(".modal-content").classList.remove("Ravenclaw");
+    modal.querySelector(".modal-content").classList.remove("ravenclaw");
   }
 
-  if (student.house == "Slytherin") {
-    modal.querySelector(".modal-content").classList.add("Slytherin");
+  if (student.house == "slytherin") {
+    modal.querySelector(".modal-content").classList.add("slytherin");
   } else {
-    modal.querySelector(".modal-content").classList.remove("Slytherin");
+    modal.querySelector(".modal-content").classList.remove("slytherin");
   }
 
   modal.classList.remove("hide");

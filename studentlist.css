@@ -115,7 +115,8 @@ div h2 {
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   align-self: center;
-  background-color: black;
+  background-color: darkgrey;
+  border: 1px solid;
   width: 70%;
   height: 70%;
   margin: 10% auto auto;
@@ -138,7 +139,11 @@ div h2 {
 
 .modal-content h1,
 .modal-content h2 {
-  color: white;
+  color: black;
+}
+
+.hide {
+  display: none;
 }
 
 .gryffindor {

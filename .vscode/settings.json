@@ -1,5 +1,6 @@
 {
     "editor.fontSize": 17,
     "editor.fontFamily": "Source Code Pro",
-    "editor.fontWeight": "bold"
+    "editor.fontWeight": "bold",
+    "liveServer.settings.CustomBrowser": "chrome"
 }
