@@ -1,27 +1,32 @@
 "use strict";
 
 const baseLink = "http://petlatkea.dk/2019/students1991.json";
+const bloodStatusLink = "http://petlatkea.dk/2019/hogwarts/families.json";
 window.addEventListener("DOMContentLoaded", init);
+
+//student prototype(template)
 const studentPro = {
-  //student prototype(template)
   fullName: "-student name-",
   firstName: "-student first name-",
   lastName: "-student last name-",
   image: "-student image-",
   house: "-student house-",
-  id: "-id-"
+  id: "-id-",
+  bloodStatus: "-blood status-"
 };
 
 const arrayOfStudents = []; //an array used with the student prototype
 //const arrayOfHouses = [];
 
 function init() {
-  console.log("init");
-  loadJSON();
+  //console.log("init");
+
   document
     .querySelector("#studentListContainer")
     .addEventListener("click", clickList);
+  getFamily();
 }
+
 let jsonData;
 function loadJSON() {
   // console.log("loadJSON");
@@ -33,7 +38,64 @@ function loadJSON() {
     });
 }
 
+/*******************blood status**************/
+let bloodStatus = [];
+let InquisitorSquad = [];
+
+function getFamily() {
+  fetch(bloodStatusLink)
+    .then(pro => pro.json())
+    .then(myJson => {
+      jsonData = myJson;
+      makeArrayOfFamily(jsonData);
+    });
+}
+
+function makeArrayOfFamily(jsonData) {
+  console.log(jsonData);
+  bloodStatus = jsonData;
+  loadJSON();
+}
+
+function checkBlood(lastName) {
+  console.log(checkBlood);
+}
+
+/*******************add****************************/
+function addStudent(student) {
+  console.log(addStudent);
+
+  if (event.target.value == "added") {
+    let obj = InquisitorSquad.find(obj => obj === student);
+    let po = InquisitorSquad.indexOf(obj);
+    //InquisitorSquad.splice(po, 1);
+    //event.target.value = "none";
+    event.target.textContent = "Add to Inquisitor Squad";
+  }
+  if (student.house == "Slytherin" || student.bloodStatus == "pure") {
+    InquisitorSquad.push(student);
+    /*}
+  if (student.house == "Gryffindor" || student.bloodStatus == "pure") {
+    InquisitorSquad.push(student);
+  }
+  if (student.house == "Ravenclaw" || student.bloodStatus == "pure") {
+    InquisitorSquad.push(student);
+  }
+  if (student.house == "Hufflepuff" || student.bloodStatus == "pure") {
+    InquisitorSquad.push(student);*/
+
+    event.target.textContent = "Remove from Inquisitor Squad";
+    event.target.value = "added";
+  } else {
+    alert(
+      "You are trying to add a student that doesn't belong to Slytherin or doesn't have pure blood."
+    );
+  }
+}
+
 function createList(studentList) {
+  console.log(bloodStatus);
+  //console.log(studentList);
   studentList.forEach(element => {
     const id = uuidv4();
     //console.log('Student list 1: '+studentList);
@@ -42,12 +104,11 @@ function createList(studentList) {
 
     const firstSpace = element.fullname.indexOf(" ");
     const lastSpace = element.fullname.lastIndexOf(" ");
+
     student.id = id;
     student.fullName = element.fullname;
     student.firstName = element.fullname.slice(0, firstSpace);
     student.lastName = element.fullname.slice(lastSpace + 1);
-    //student.firstName = element.firstName;
-    //student.lastName = element.lastName;
     student.image =
       "images/" +
       student.lastName.toLowerCase() +
@@ -56,10 +117,19 @@ function createList(studentList) {
       ".png";
 
     student.house = element.house;
+
+    if (bloodStatus.half.includes(student.lastName)) {
+      student.bloodStatus = "half";
+    } else if (bloodStatus.pure.includes(student.lastName)) {
+      student.bloodStatus = "pure";
+    } else {
+      student.bloodStatus = "muggle";
+    }
+
     arrayOfStudents.push(student);
     //console.log(student);
 
-    console.log(arrayOfStudents);
+    //console.log(arrayOfStudents);
 
     displayList(arrayOfStudents);
   });
@@ -83,10 +153,15 @@ function displayStudent(student) {
   clone.querySelector(".firstName span").textContent = student.firstName;
   clone.querySelector(".lastName span").textContent = student.lastName;
   clone.querySelector(".house span").textContent = student.house;
+  clone.querySelector(".family").textContent = student.bloodStatus;
+
   //clone.querySelector(".image img").setAttribute("src", student.image);
   clone
     .querySelector("#selectorForModal")
     .addEventListener("click", () => showOneStudent(student));
+  clone
+    .querySelector(".add")
+    .addEventListener("click", () => addStudent(student));
   //console.log(student.firstname);
   //clone
   //.querySelector("[data-action=remove]")
@@ -100,7 +175,7 @@ displayList(arrayOfStudents);
 /***********************filtering******************************/
 
 let filteredList = arrayOfStudents;
-console.log(filteredList);
+//console.log(filteredList);
 
 document.querySelector("#gryffindor").addEventListener("click", function() {
   filteredList = arrayOfStudents.filter(function(student) {
@@ -139,7 +214,7 @@ document.querySelector("#house").addEventListener("click", sortByHouse);
 
 let sortedList = arrayOfStudents;
 displayList(sortedList);
-console.log(sortedList);
+//console.log(sortedList);
 
 document.querySelector("#All").addEventListener("click", function() {
   sortedList = arrayOfStudents;
@@ -157,7 +232,7 @@ function sortByFirstName() {
   sortedList.sort(sort);
   document.querySelector("#studentListContainer").innerHTML = "";
   displayList(sortedList);
-  console.log(sortedList);
+  //console.log(sortedList);
 }
 
 function sortByLastName() {
@@ -171,7 +246,7 @@ function sortByLastName() {
   sortedList.sort(sort);
   document.querySelector("#studentListContainer").innerHTML = "";
   displayList(sortedList);
-  console.log(sortedList);
+  //console.log(sortedList);
 }
 
 function sortByHouse() {
@@ -185,21 +260,22 @@ function sortByHouse() {
   sortedList.sort(sort);
   document.querySelector("#studentListContainer").innerHTML = "";
   displayList(sortedList);
-  console.log(sortedList);
-  console.table(sort);
+  //console.log(sortedList);
+  //console.table(sort);
 }
 
 /***************modal*********************/
 
 function showOneStudent(student) {
-  console.log("showOneStudent");
-  console.log(student.image);
+  //console.log("showOneStudent");
+  //console.log(student.image);
 
   const modal = document.querySelector(".modal");
 
   modal.querySelector(".studentImage").src = student.image;
   modal.querySelector(".name span").textContent = student.fullName;
   modal.querySelector(".house").textContent = student.house;
+  modal.querySelector(".family").textContent = student.bloodStatus;
 
   if (student.house == "Gryffindor") {
     modal.querySelector(".modal-content").classList.add("gryffindor");
@@ -255,6 +331,6 @@ function clickRemove(event) {
   let toBeRemoved = findById(event.target.id);
   arrayOfStudents.splice(toBeRemoved, 1);
 
-  console.log(toBeRemoved);
+  //console.log(toBeRemoved);
   displayList(arrayOfStudents);
 }
