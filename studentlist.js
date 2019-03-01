@@ -20,7 +20,7 @@ const myName = {
   fullName: "Yordanka Krasteva",
   firstName: "Yordanka",
   lastName: "Krasteva",
-  image: "image",
+  myImage: "image",
   house: "Gryffindor",
   bloodStatus: "muggle"
 };
@@ -327,7 +327,7 @@ function clickList(event) {
   if (event.target.tagName === "BUTTON") {
     clickRemove(event);
 
-    // console.log(event.target.id);
+    console.log(event.target.id);
   }
 }
 
@@ -339,6 +339,10 @@ function clickRemove(event) {
   let toBeRemoved = findById(event.target.id);
   arrayOfStudents.splice(toBeRemoved, 1);
 
-  //console.log(toBeRemoved);
+  console.log(toBeRemoved);
   displayList(arrayOfStudents);
 }
+
+//if (myName.firstName === "Yordanka") {
+// alert("You can't expell the student right now. Please try again later. ");
+//}
