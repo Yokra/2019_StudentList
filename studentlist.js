@@ -4,12 +4,12 @@ const baseLink = "http://petlatkea.dk/2019/students1991.json";
 window.addEventListener("DOMContentLoaded", init);
 const studentPro = {
   //student prototype(template)
-
   fullName: "-student name-",
   firstName: "-student first name-",
   lastName: "-student last name-",
   image: "-student image-",
-  house: "-student house-"
+  house: "-student house-",
+  id: "-id-"
 };
 
 const arrayOfStudents = []; //an array used with the student prototype
@@ -18,6 +18,9 @@ const arrayOfStudents = []; //an array used with the student prototype
 function init() {
   console.log("init");
   loadJSON();
+  document
+    .querySelector("#studentListContainer")
+    .addEventListener("click", clickList);
 }
 let jsonData;
 function loadJSON() {
@@ -32,13 +35,14 @@ function loadJSON() {
 
 function createList(studentList) {
   studentList.forEach(element => {
+    const id = uuidv4();
     //console.log('Student list 1: '+studentList);
     let student = Object.create(studentPro); //New object called "student" - Object.create() method creates a new object, using an existing object as the prototype of  create
     // newly created object
 
     const firstSpace = element.fullname.indexOf(" ");
     const lastSpace = element.fullname.lastIndexOf(" ");
-    student.id = element.id;
+    student.id = id;
     student.fullName = element.fullname;
     student.firstName = element.fullname.slice(0, firstSpace);
     student.lastName = element.fullname.slice(lastSpace + 1);
@@ -55,7 +59,7 @@ function createList(studentList) {
     arrayOfStudents.push(student);
     //console.log(student);
 
-    //console.log(arrayOfStudents);
+    console.log(arrayOfStudents);
 
     displayList(arrayOfStudents);
   });
@@ -75,7 +79,7 @@ function displayStudent(student) {
   const template = document.querySelector("#studentTemplate").content;
   const clone = template.cloneNode(true);
 
-  clone.querySelector("[data-action=remove]").dataset.id = student.id;
+  clone.querySelector("[data-action=remove]").id = student.id;
   clone.querySelector(".firstName span").textContent = student.firstName;
   clone.querySelector(".lastName span").textContent = student.lastName;
   clone.querySelector(".house span").textContent = student.house;
@@ -84,9 +88,9 @@ function displayStudent(student) {
     .querySelector("#selectorForModal")
     .addEventListener("click", () => showOneStudent(student));
   //console.log(student.firstname);
-  clone
-    .querySelector("[data-action=remove]")
-    .addEventListener("click", removeStudent);
+  //clone
+  //.querySelector("[data-action=remove]")
+  //.addEventListener("click", removeStudent);
 
   document.querySelector("#studentListContainer").appendChild(clone);
 }
@@ -227,14 +231,30 @@ function showOneStudent(student) {
 
 /***********************expeling**************************/
 
-function removeStudent(event) {
-  console.log("removeStudents");
-
-  console.log(arrayOfStudents);
-  let obj = arrayOfStudents.find(obj => obj.id === event.target.dataset.id);
-  let pos = arrayOfStudents.indexOf(obj);
-  console.log(pos);
-  arrayOfStudents.splice(pos, 1);
-  console.log(arrayOfStudents);
+function uuidv4() {
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(c) {
+    var r = (Math.random() * 16) | 0,
+      v = c == "x" ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
 }
-removeStudent();
+
+function clickList(event) {
+  if (event.target.tagName === "BUTTON") {
+    clickRemove(event);
+
+    // console.log(event.target.id);
+  }
+}
+
+function clickRemove(event) {
+  function findById(id) {
+    return arrayOfStudents.findIndex(obj => obj.id === id);
+  }
+
+  let toBeRemoved = findById(event.target.id);
+  arrayOfStudents.splice(toBeRemoved, 1);
+
+  console.log(toBeRemoved);
+  displayList(arrayOfStudents);
+}
