@@ -15,8 +15,17 @@ const studentPro = {
   bloodStatus: "-blood status-"
 };
 
+//myName prototype(template)
+const myName = {
+  fullName: "Yordanka Krasteva",
+  firstName: "Yordanka",
+  lastName: "Krasteva",
+  image: "image",
+  house: "Gryffindor",
+  bloodStatus: "muggle"
+};
+
 const arrayOfStudents = []; //an array used with the student prototype
-//const arrayOfHouses = [];
 
 function init() {
   //console.log("init");
@@ -94,8 +103,10 @@ function addStudent(student) {
 }
 
 function createList(studentList) {
-  console.log(bloodStatus);
+  //console.log(bloodStatus);
   //console.log(studentList);
+
+  arrayOfStudents.push(myName);
   studentList.forEach(element => {
     const id = uuidv4();
     //console.log('Student list 1: '+studentList);
@@ -127,9 +138,6 @@ function createList(studentList) {
     }
 
     arrayOfStudents.push(student);
-    //console.log(student);
-
-    //console.log(arrayOfStudents);
 
     displayList(arrayOfStudents);
   });
