@@ -346,3 +346,5 @@ function clickRemove(event) {
     displayList(arrayOfStudents);
   }
 }
+
+//The expel button doesn't work for my name
