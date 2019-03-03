@@ -1,6 +1,6 @@
 "use strict";
 
-const baseLink = "http://petlatkea.dk/2019/students1991.json";
+const baseLink = "https://petlatkea.dk/2019/hogwarts/students.json";
 const bloodStatusLink = "http://petlatkea.dk/2019/hogwarts/families.json";
 window.addEventListener("DOMContentLoaded", init);
 
@@ -20,7 +20,7 @@ const myName = {
   fullName: "Yordanka Krasteva",
   firstName: "Yordanka",
   lastName: "Krasteva",
-  myImage: "image",
+  image: "images/yordanka_k.png",
   house: "Gryffindor",
   bloodStatus: "muggle"
 };
@@ -105,7 +105,6 @@ function addStudent(student) {
 function createList(studentList) {
   //console.log(bloodStatus);
   //console.log(studentList);
-
   arrayOfStudents.push(myName);
   studentList.forEach(element => {
     const id = uuidv4();
@@ -158,9 +157,9 @@ function displayStudent(student) {
   const clone = template.cloneNode(true);
 
   clone.querySelector("[data-action=remove]").id = student.id;
-  clone.querySelector(".firstName span").textContent = student.firstName;
-  clone.querySelector(".lastName span").textContent = student.lastName;
-  clone.querySelector(".house span").textContent = student.house;
+  clone.querySelector(".firstName").textContent = student.firstName;
+  clone.querySelector(".lastName").textContent = student.lastName;
+  clone.querySelector(".house").textContent = student.house;
   clone.querySelector(".family").textContent = student.bloodStatus;
 
   //clone.querySelector(".image img").setAttribute("src", student.image);
@@ -337,12 +336,13 @@ function clickRemove(event) {
   }
 
   let toBeRemoved = findById(event.target.id);
-  arrayOfStudents.splice(toBeRemoved, 1);
+  console.log(event.path[1].id);
+  if (event.path[1].id === "Yordanka") {
+    alert("You can't expell the student right now. Please try again later. ");
+  } else {
+    arrayOfStudents.splice(toBeRemoved, 1);
 
-  console.log(toBeRemoved);
-  displayList(arrayOfStudents);
+    console.log(toBeRemoved);
+    displayList(arrayOfStudents);
+  }
 }
-
-//if (myName.firstName === "Yordanka") {
-// alert("You can't expell the student right now. Please try again later. ");
-//}

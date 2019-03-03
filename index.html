@@ -20,53 +20,61 @@
       <h1>Hogwarts</h1>
       <h2>Students from 1991</h2>
     </header>
-    <main>
-      <nav>
-        <a id="All" href="#">All</a>
-        <a id="firstName" href="#">Fist Name</a>
-        <a id="lastName" href="#">Last Name</a>
-        <a id="house" href="#">House</a>
-        <div class="dropdown">
-          <a>Filters</a>
-          <div class="dropdown-window">
-            <span id="gryffindor">Gryffindor</span>
-            <span id="hufflepuff">Hufflepuff</span>
-            <span id="ravenclaw">Ravenclaw</span>
-            <span id="slytherin">Slytherin</span>
-            <span id="all">All</span>
-          </div>
-        </div>
-      </nav>
 
+    <nav>
+      <a id="All" href="#">All</a>
+      <a id="firstName" href="#">Fist Name</a>
+      <a id="lastName" href="#">Last Name</a>
+      <a id="house" href="#">House</a>
+      <div class="dropdown">
+        <a>Filters</a>
+        <div class="dropdown-window">
+          <span id="gryffindor">Gryffindor</span>
+          <span id="hufflepuff">Hufflepuff</span>
+          <span id="ravenclaw">Ravenclaw</span>
+          <span id="slytherin">Slytherin</span>
+          <span id="all">All</span>
+        </div>
+      </div>
+    </nav>
+    <main>
+      <div id="elements">
+        <h2>Firts Name</h2>
+        <h2>Last Name</h2>
+        <h2>House</h2>
+        <h2>Blood Status</h2>
+      </div>
       <div id="studentListContainer"></div>
 
       <template id="studentTemplate">
-        <a id="selectorForModal">
+        <div class="section" id="selectorForModal">
           <div>
-            <h1 class="firstName">First Name: <span></span></h1>
-          </div>
-          <div>
-            <h1 class="lastName">Last Name: <span></span></h1>
+            <h1 class="firstName"></h1>
           </div>
           <div>
-            <h1 class="house">House: <span></span></h1>
+            <h1 class="lastName"></h1>
           </div>
-          <div class="image">
-            <img src="" />
+          <div>
+            <h1 class="house"></h1>
           </div>
-        </a>
-        <div>
-          <h1 class="family"></h1>
+          <div>
+            <h1 class="family"></h1>
+          </div>
         </div>
-        <button data-action="remove" href="#">Expel</button>
-        <button class="add">Add to Inquisitor Squad</button>
+        <p>
+          <button data-action="remove" href="#">Expel</button>
+          <button class="add">Add to Inquisitor Squad</button>
+        </p>
+        <div class="image">
+          <img src="" />
+        </div>
       </template>
     </main>
 
     <section id="" class="modal hide">
       <div class="modal-content">
         <img class="studentImage" src="" alt="image" />
-        <h1 class="name">Name: <span></span></h1>
+        <h1 class="name"><span></span></h1>
         <h2 class="house">Student House</h2>
         <h3 class="family">Blood status</h3>
       </div>
